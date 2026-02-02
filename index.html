@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashok Kumar - Full Stack Developer | India</title>
+    <meta name="description" content="Ashok Kumar - Full Stack Developer specializing in React, Next.js, Node.js, springBoot, AWS & Modern Web Experiences">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --bg2: #12121a;
+            --card: #1a1a2e;
+            --text: #e0e7ff;
+            --text2: #94a3b8;
+            --accent: #00ff88;
+            --accent2: #00d4ff;
+            --purple: #8b5cf6;
+            --border: rgba(0, 255, 136, 0.15);
+            --gradient: linear-gradient(135deg, #00ff88, #00d4ff);
+        }
+        body.light-mode {
+            --bg: #f8fafc;
+            --bg2: #ffffff;
+            --card: #ffffff;
+            --text: #1e293b;
+            --text2: #64748b;
+            --accent: #0066ff;
+            --accent2: #0099ff;
+            --purple: #7c3aed;
+            --border: rgba(0, 102, 255, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: var(--bg); 
+            color: var(--text); 
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        ::selection { background: var(--accent); color: #000; }
+
+        /* Particles Background */
+        #particles-js {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: var(--bg2); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
+
+        /* Header */
+        header {
+            position: fixed; top: 0; width: 100%; padding: 5px 7%; 
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+            transition: 0.4s;
+        }
+        header.scrolled {
+            background: rgba(10,10,15,0.95); padding: 18px 7%; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .logo {
+            font-size: 34px; font-weight: 900; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        nav a {
+            color: var(--text); margin: 0 30px; font-weight: 500; font-size: 17px; position: relative; transition: 0.4s;
+        }
+        nav a::after {
+            content: ''; position: absolute; bottom: -8px; left: 0; width: 0; height: 3px; background: var(--accent); transition: 0.4s;
+        }
+        nav a:hover::after, nav a.active::after { width: 100%; }
+        nav a:hover, nav a.active { color: var(--accent); }
+        .header-right {
+            display: flex; align-items: center; gap: 25px;
+        }
+        .theme-toggle {
+            width: 60px; height: 30px; background: var(--card); border-radius: 50px; position: relative; cursor: pointer;
+            border: 2px solid var(--border);
+        }
+        .theme-toggle::before {
+            content: ''; position: absolute; top: 3px; left: 5px; width: 22px; height: 22px; background: var(--accent);
+            border-radius: 50%; transition: 0.4s;
+        }
+        body.light-mode .theme-toggle::before { left: 33px; background: var(--accent); }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh; display: flex; align-items: center; padding: 0 7%; position: relative ;margin-top: 40px;
+        }
+        .hero-content {
+            max-width: 900px; z-index: 2;
+        }
+        .hero h3 {
+            font-size: 24px; color: var(--accent); font-weight: 600; letter-spacing: 3px; text-transform: uppercase ;
+        }
+        .hero h1 {
+            font-size: 90px; font-weight: 900; line-height: 1; margin: 20px 0;
+            background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero h1 span {
+            display: block; font-size: 70px; color: var(--text);
+        }
+        .typing {
+            font-size: 48px; font-weight: 700; margin: 30px 0; height: 70px;
+        }
+        .hero p {
+            font-size: 22px; margin: 35px 0; max-width: 750px; opacity: 0.9; color: var(--text2);
+        }
+        .hero-buttons {
+            margin-top: 50px; display: flex; gap: 25px; flex-wrap: wrap;
+        }
+        .btn {
+            padding: 18px 45px; border-radius: 50px; font-weight: 700; font-size: 18px; cursor: pointer;
+            transition: all 0.4s; display: inline-flex; align-items: center; gap: 12px;
+        }
+        .btn-primary {
+            background: var(--gradient); color: #000; box-shadow: 0 15px 40px rgba(0,255,136,0.4);
+        }
+        .btn-primary:hover {
+            transform: translateY(-10px); box-shadow: 0 25px 50px rgba(0,255,136,0.6);
+        }
+        .btn-secondary {
+            background: transparent; border: 2px solid var(--accent); color: var(--accent);
+        }
+        .btn-secondary:hover {
+            background: var(--accent); color: #000;
+        }
+
+        /* Floating Animation */
+        .hero-image {
+            position: absolute; right: 7%; top: 50%; transform: translateY(-50%); width: 500px; z-index: 1; margin-top: 50px;
+        }
+        .hero-image img {
+            width: 100%; border-radius: 30px; border: 4px solid var(--accent); box-shadow: 0 30px 80px rgba(0,255,136,0.3);
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(-50px); }
+            50% { transform: translateY(-80px); }
+        }
+
+        /* About Section */
+        .about-image {
+            
+           width: 35vw;
+            animation: float 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px var(--main-color));
+        }
+        .about {
+            padding: 150px 7%; background: var(--bg2); position: relative;
+        }
+        .about-content {
+            max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center;
+        }
+        .about-text h2 {
+            font-size: 60px; font-weight: 800; margin-bottom: 30px;
+            background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .about-text p {
+            font-size: 20px; margin: 25px 0; color: var(--text2);
+        }
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 50px;
+        }
+        .stat {
+            text-align: center; padding: 30px; background: var(--card); border-radius: 20px; border: 1px solid var(--border);
+        }
+        .stat h3 {
+            font-size: 50px; font-weight: 800; color: var(--accent); margin-bottom: 10px;
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 150px 7%; background: var(--bg);
+        }
+        .section-title {
+            text-align: center; font-size: 70px; font-weight: 900; margin-bottom: 100px;
+            background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .skills-container {
+            max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 50px;
+        }
+        .skill-category {
+            background: var(--card); padding: 40px; border-radius: 25px; border: 1px solid var(--border);
+        }
+        .skill-category h3 {
+            font-size: 30px; margin-bottom: 30px; color: var(--accent);
+        }
+        .skill-list {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+        }
+        .skill-item {
+            padding: 20px; background: var(--bg2); border-radius: 15px; text-align: center;
+            transition: 0.4s; border: 1px solid var(--border);
+        }
+        .skill-item:hover {
+            transform: translateY(-10px); background: var(--gradient); color: #000;
+            box-shadow: 0 20px 40px rgba(0,255,136,0.3);
+        }
+        .skill-item i {
+            font-size: 40px; margin-bottom: 15px; color: var(--accent);
+        }
+
+        /* Experience Timeline */
+        .experience {
+            padding: 150px 7%; background: var(--bg2);
+        }
+        .timeline {
+            max-width: 1200px; margin: 0 auto; position: relative;
+        }
+        .timeline::before {
+            content: ''; position: absolute; top: 0; left: 50%; width: 4px; height: 100%; background: var(--border);
+        }
+        .timeline-item {
+            width: 50%; padding: 30px 50px; position: relative; margin-bottom: 80px;
+        }
+        .timeline-item:nth-child(odd) { left: 0; }
+        .timeline-item:nth-child(even) { left: 50%; }
+        .timeline-content {
+            background: var(--card); padding: 40px; border-radius: 20px; border: 1px solid var(--border);
+            position: relative;
+        }
+        .timeline-content::before {
+            content: ''; position: absolute; top: 30px; width: 25px; height: 25px; background: var(--accent);
+            border-radius: 50%; border: 5px solid var(--bg2);
+        }
+        .timeline-item:nth-child(odd) .timeline-content::before { right: -65px; }
+        .timeline-item:nth-child(even) .timeline-content::before { left: -65px; }
+
+        /* Projects Section */
+        .projects {
+            padding: 150px 7%; background: var(--bg);
+        }
+        .projects-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 50px; max-width: 1600px; margin: 100px auto 0;
+        }
+        .project-card {
+            position: relative; height: 500px; border-radius: 30px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+        }
+        .project-card img {
+            width: 100%; height: 100%; object-fit: cover; transition: 0.8s;
+        }
+        .project-card:hover img { transform: scale(1.2); }
+        .project-overlay {
+            position: absolute; bottom: 0; left: 0; width: 100%; padding: 50px; 
+            background: linear-gradient(transparent, rgba(0,0,0,0.95)); color: white;
+            transform: translateY(100px); transition: 0.8s;
+        }
+        .project-card:hover .project-overlay { transform: translateY(0); }
+        .project-overlay h3 {
+            font-size: 36px; margin-bottom: 20px;
+        }
+        .project-tags {
+            display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0;
+        }
+        .project-tags span {
+            background: var(--accent); color: #000; padding: 10px 20px; border-radius: 50px; font-size: 14px; font-weight: 700;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 150px 7%; background: var(--bg2); text-align: center;
+        }
+        .contact h2 {
+            font-size: 70px; font-weight: 900; margin-bottom: 50px;
+            background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .contact-form {
+            max-width: 800px; margin: 0 auto;
+        }
+        .form-group {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;
+        }
+        .contact input, .contact textarea {
+            width: 100%; padding: 25px; background: var(--card); border: 1px solid var(--border);
+            border-radius: 20px; color: var(--text); font-size: 18px;
+        }
+        .contact textarea { grid-column: 1/3; height: 200px; resize: none; }
+
+        /* Footer */
+        footer {
+            padding: 100px 7% 50px; background: var(--bg); text-align: center; border-top: 1px solid var(--border);
+        }
+        .social-links {
+            margin: 50px 0;
+        }
+        .social-links a {
+            display: inline-flex; width: 60px; height: 60px; background: var(--card); color: var(--text);
+            border-radius: 50%; align-items: center; justify-content: center; margin: 0 15px; font-size: 24px;
+            transition: 0.4s; border: 1px solid var(--border);
+        }
+        .social-links a:hover {
+            background: var(--accent); color: #000; transform: translateY(-10px);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 60px; }
+            .hero h1 span { font-size: 50px; }
+            .typing { font-size: 36px; }
+            .about-content { grid-template-columns: 1fr; }
+            .form-group { grid-template-columns: 1fr; }
+            .timeline-item { width: 100%; left: 0 !important; }
+            .timeline::before { left: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Ashok<span>Kumar</span></div>
+        <nav>
+            <a href="#home" class="active">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <div class="header-right">
+            <div class="theme-toggle" id="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h3 >Hello, I am  </h3 >
+            <h1>Ashok Kumar<span>Full Stack Developer</span></h1>
+            <div class="typing"> </div>
+            <p>For 2+ years I have been creating modern web applications that not only look good but also perform well. React, Node, Spring Boot, Avas — all in one developer!</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary"><i class="fas fa-rocket"></i> Hire Me Now</a>
+                <a href="#" class="btn btn-secondary"><i class="fas fa-download"></i> Download CV</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="material/a.jpeg " alt="Ashok Kumar" >
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about" id="about">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>About Me</h2>
+                <p>I am Ashok Kumar, from India. Doing full stack development since 2024. I have delivered 5+ projects — from startups to munchies.
+</p>
+                <p>I love writing clean code, optimizing performance, and making clients go "that bro that!" Likes to be spoken to.</p>
+                <p>When not writing code, I drink tea, watch cricket, and try out new frameworks.</p>
+                <div class="stats-grid">
+                    <div class="stat"><h3 class="counter" data-target="5">0</h3><p>Projects</p></div>
+                    <div class="stat"><h3 class="counter" data-target="0">0</h3><p>Years Exp</p></div>
+                    <div class="stat"><h3 class="counter" data-target="3">0</h3><p>Happy Clients</p></div>
+                    <div class="stat"><h3 class="counter" data-target="9">0</h3><p>Satisfaction %</p></div>
+                </div>
+            </div>
+            <div class="about-image">
+               <img src="https://cdn3d.iconscout.com/3d/premium/thumb/web-developer-4506461-3738664.png" alt="Ashok 3D">
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="skills" id="skills">
+        <h2 class="section-title">My Tech Arsenal</h2>
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3>Frontend</h3>
+                <div class="skill-list">
+                    <div class="skill-item"><i class="fab fa-html5"></i><h4>Html</h4></div>
+                    <div class="skill-item"><i class="fab fa-css3-alt"></i><h4>Css</h4></div>
+                    <div class="skill-item"><i class="fab fa-js"></i><h4>JavaScript</h4></div>
+                    <div class="skill-item"><i class="fab fa-react"></i><h4>react js</h4></div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Backend</h3>
+                <div class="skill-list">
+                    <div class="skill-item"><i class="fab fa-java java-color"></i><h4>Java</h4></div>
+                    <div class="skill-item"><i class="fas fa-leaf spring-color"></i><h4>springBoot</h4></div>
+                    <div class="skill-item"><i class="fas fa-database"></i><h4>MongoDB / PostgreSQL</h4></div>
+                    <div class="skill-item"><i class="fab fa-node-js"></i><h4>Node.js / Express</h4></div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Tools & DevOps</h3>
+                <div class="skill-list">
+                    <div class="skill-item"><i class="fab fa-aws"></i><h4>AWS / Vercel</h4></div>
+                    <div class="skill-item"><i class="fab fa-docker"></i><h4>Docker</h4></div>
+                    <div class="skill-item"><i class="fab fa-git-alt"></i><h4>Git / GitHub</h4></div>
+                    <div class="skill-item"><i class="fab fa-figma"></i><h4>Figma</h4></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="experience" id="experience">
+        <h2 class="section-title">My Journey</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>2026 - Present</h3>
+                    <h4>Full Stack Developer</h4>
+                    <p>Tech Startup • Leading team of 3 developers • Built 3 SaaS products with 1k+ users</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>2024 - 2025</h3>
+                    <h4>Full Stack Developer</h4>
+                    <p>Freelancing • Delivered 10+ projects • Specialized in React js + Spring boot</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>2023 - 2024</h3>
+                    <h4>Frontend Developer</h4>
+                    <p>Html • Css, JavaScript, React js</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="projects" id="projects">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800" alt="E-Commerce">
+                <div class="project-overlay">
+                    <h3>E-Commerce Empire</h3>
+                    <div class="project-tags">
+                        <span>Next.js 14</span><span>TypeScript</span><span>Prisma</span><span>Stripe</span><span>Tailwind</span>
+                    </div>
+                    <p>Complete shopping platform with admin dashboard, payment, inventory — ₹50L+ GMV</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1558655146-9f40138ed1cb?w=800" alt="Social App">
+                <div class="project-overlay">
+                    <h3>SocialWave</h3>
+                    <div class="project-tags">
+                        <span>React Native</span><span>Node.js</span><span>Socket.io</span><span>MongoDB</span>
+                    </div>
+                    <p>Instagram + WhatsApp = SocialWave. 50k+ downloads in first month</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800" alt="AI Dashboard">
+                <div class="project-overlay">
+                    <h3>AI Analytics Pro</h3>
+                    <div class="project-tags">
+                        <span>Python</span><span>FastAPI</span><span>React</span><span>D3.js</span><span>AWS</span>
+                    </div>
+                    <p>Real-time data visualization + ML model deployment for enterprises</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <h2>Let's Build Something Amazing Together</h2>
+        <div class="contact-form">
+            <div class="form-group">
+                <input type="text" placeholder="Your Name">
+                <input type="email" placeholder="Your Email">
+            </div>
+            <div class="form-group">
+                <input type="text" placeholder="Project Budget (₹)">
+                <input type="text" placeholder="Timeline">
+            </div>
+            <textarea placeholder="Tell me about your project..."></textarea>
+            <button class="btn btn-primary">Send Message <i class="fas fa-paper-plane"></i></button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/Ashokjangid78"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/ashok-jangir-197a92329/"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/ashok__jangid01"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>Made with <i class="fas fa-heart" style="color:#ff0066"></i> by Ashok Kumar • © 2025 All Rights Reserved</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+    <script>
+        // Particles
+        particlesJS("particles-js", {
+            particles: { number: { value: 120 }, color: { value: "#00ff88" }, size: { value: 3 }, move: { speed: 1.5 }, opacity: { value: 0.6 } },
+            interactivity: { events: { onhover: { enable: true, mode: "repulse" } } }
+        });
+
+        // Header Scroll Effect
+        window.addEventListener('scroll', () => {
+            document.querySelector('header').cassList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Typing Animation
+        new Typed('.typing', {
+            strings: ['Full Stack Developer' , 'Problem Solver', 'Your Next Team Member'],
+            typeSpeed: 80, backSpeed: 50, loop: true
+        });
+
+        // Counter Animation
+        const counters = document.querySelectorAll('.counter');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = +counter.getAttribute('data-target');
+                    let count = 0;
+                    const increment = target / 100;
+                    const timer = setInterval(() => {
+                        count += increment;
+                        if (count >= target) {
+                            counter.textContent = target + '+';
+                            clearInterval(timer);
+                        } else {
+                            counter.textContent = Math.ceil(count);
+                        }
+                    }, 20);
+                }
+            });
+        }, { threshold: 0.5 });
+        counters.forEach(counter => observer.observe(counter));
+
+        // Theme Toggle
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+        });
+    </script>
+</body>
+</html>
